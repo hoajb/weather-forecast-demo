@@ -1,4 +1,4 @@
-package vn.hoanguyen.weatherforecast.ui.theme
+package vn.hoanguyen.weatherforecast.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

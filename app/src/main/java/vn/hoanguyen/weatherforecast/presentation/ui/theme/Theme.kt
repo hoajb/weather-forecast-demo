@@ -1,4 +1,4 @@
-package vn.hoanguyen.weatherforecast.ui.theme
+package vn.hoanguyen.weatherforecast.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

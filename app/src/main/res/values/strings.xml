@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Weather Forecast Application</string>
+    <string name="error_generic">Unexpected error</string>
 </resources>
