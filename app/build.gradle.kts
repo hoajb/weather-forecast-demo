@@ -26,13 +26,21 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            buildConfigField("String", "BASE_API_URL", "\"https://api.openweathermap.org/data/2.5/\"")
+            buildConfigField(
+                "String",
+                "BASE_API_URL",
+                "\"https://api.openweathermap.org/data/2.5/\""
+            )
         }
 
         getByName("debug") {
             applicationIdSuffix = ".debug"
             isDebuggable = true
-            buildConfigField("String", "BASE_API_URL", "\"https://api.openweathermap.org/data/2.5/\"")
+            buildConfigField(
+                "String",
+                "BASE_API_URL",
+                "\"https://api.openweathermap.org/data/2.5/\""
+            )
         }
     }
     compileOptions {
@@ -41,6 +49,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        allWarningsAsErrors = false
+        freeCompilerArgs += listOf(
+            "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
+        )
     }
     buildFeatures {
         compose = true
@@ -91,6 +103,7 @@ dependencies {
 
     //UI
     implementation(libs.androidx.compose.material.iconsExtended)
+    implementation(libs.androidx.compose.material)
 
     // Hilt
     implementation(libs.dagger.hilt.android)

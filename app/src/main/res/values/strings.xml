@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Weather Forecast Application</string>
     <string name="error_generic">Unexpected error</string>
+    <string name="home_title_bar">Home</string>
 </resources>
