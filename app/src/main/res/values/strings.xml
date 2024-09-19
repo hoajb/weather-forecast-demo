@@ -6,4 +6,6 @@
     <string name="wind_speed">Wind Speed</string>
     <string name="city">City</string>
     <string name="not_found">Oops! City not found.\nPlease try again.</string>
+    <string name="not_found_favorite">Oops! No favorite city found</string>
+    <string name="favorited_city">Favorited City</string>
 </resources>

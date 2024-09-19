@@ -43,7 +43,7 @@ class DetailsViewModel @Inject constructor(
 
                 val weatherDetailsUI = WeatherDetailsUI(
                     notFound = false,
-                    name = "${context.getText(R.string.city)}: ${weatherUIModel.name}",
+                    name = weatherUIModel.name,
                     temp = "${floor(weatherUIModel.main.temp).toInt() - 273} °C",
                     humidity = "${weatherUIModel.main.humidity} %",
                     windSpeed = "${weatherUIModel.wind.speed} Km/h",

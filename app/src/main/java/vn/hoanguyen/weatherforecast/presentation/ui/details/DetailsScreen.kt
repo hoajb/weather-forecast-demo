@@ -15,8 +15,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material.icons.rounded.StarBorder
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,22 +38,27 @@ import vn.hoanguyen.weatherforecast.R
 import vn.hoanguyen.weatherforecast.app.extensions.collectAsEffect
 import vn.hoanguyen.weatherforecast.presentation.base.showToast
 import vn.hoanguyen.weatherforecast.presentation.ui.common.TopAppBar
+import vn.hoanguyen.weatherforecast.presentation.ui.favorite.FavoriteCitiesViewModel
+import vn.hoanguyen.weatherforecast.presentation.ui.models.FavoriteCityUI
 import vn.hoanguyen.weatherforecast.presentation.ui.theme.AppTypography
 
 @Composable
 fun DetailsScreen(
     viewModel: DetailsViewModel = hiltViewModel<DetailsViewModel>(),
+    favoriteCitiesViewModel: FavoriteCitiesViewModel = hiltViewModel<FavoriteCitiesViewModel>(),
     onBack: () -> Unit,
     city: String,
 ) {
     val context = LocalContext.current
     viewModel.error.collectAsEffect { e -> e.showToast(context) }
 
+    val favoriteCityUI: FavoriteCityUI? by favoriteCitiesViewModel.favoriteCity.collectAsStateWithLifecycle()
     val isLoading: Boolean by viewModel.isLoading.collectAsStateWithLifecycle()
     val uiModel: WeatherDetailsUI by viewModel.uiModel.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         viewModel.getWeatherData(cityName = city)
+        favoriteCitiesViewModel.loadFavoriteCity(cityName = city)
     }
 
     DetailsContent(
@@ -59,7 +66,14 @@ fun DetailsScreen(
         city = city,
         isLoading = isLoading,
         uiModel = uiModel,
-        isFavorited = true
+        isFavorite = favoriteCityUI != null,
+        onFavoritePressed = {
+            if (favoriteCityUI == null) {
+                favoriteCitiesViewModel.addFavoriteCity(name = uiModel.name)
+            } else {
+                favoriteCitiesViewModel.removeFavoriteCity(cityId = favoriteCityUI?.id.orEmpty())
+            }
+        }
     )
 }
 
@@ -69,13 +83,15 @@ fun DetailsContent(
     city: String,
     isLoading: Boolean,
     uiModel: WeatherDetailsUI,
-    isFavorited: Boolean,
+    isFavorite: Boolean,
+    onFavoritePressed: () -> Unit
 ) {
 
     Timber.d("icon: ${uiModel.icon}")
     Scaffold(topBar = {
         TopAppBar(title = city, onBack = onBack)
     }) { paddingValues ->
+        val context = LocalContext.current
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -97,7 +113,10 @@ fun DetailsContent(
                             .padding(30.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(uiModel.name, style = AppTypography.titleMedium)
+                        Text(
+                            "${context.getText(R.string.city)}: ${uiModel.name}",
+                            style = AppTypography.titleMedium
+                        )
                         Spacer(Modifier.height(30.dp))
                         Image(
                             modifier = Modifier
@@ -126,11 +145,17 @@ fun DetailsContent(
                         }
                     }
 
-                    Icon(
-                        Icons.Rounded.Star,
-                        contentDescription = "favorite",
-                        modifier = Modifier.align(Alignment.TopEnd),
-                    )
+
+
+                    IconButton(
+                        onClick = onFavoritePressed,
+                        modifier = Modifier.padding(8.dp)
+                    ) {
+                        Icon(
+                            if (isFavorite) Icons.Rounded.Star else Icons.Rounded.StarBorder,
+                            contentDescription = "favorite",
+                        )
+                    }
                 }
             }
         }
@@ -151,7 +176,7 @@ fun WeatherItem(
                 .width(36.dp)
                 .height(36.dp),
             painter = painterResource(icon),
-            contentDescription = "weather"
+            contentDescription = "weather",
         )
         Spacer(modifier = Modifier.width(8.dp))
         Column {

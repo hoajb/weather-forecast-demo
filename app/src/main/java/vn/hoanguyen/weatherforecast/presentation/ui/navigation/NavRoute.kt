@@ -11,7 +11,7 @@ sealed class NavRoute(val path: String) {
     data object Favorite : NavRoute(Path.FAVORITE)
 
     data object Details : NavRoute(Path.DETAILS) {
-        val city = "city"
+        const val CITY = "city"
     }
 
     // build navigation path (for screen navigation)

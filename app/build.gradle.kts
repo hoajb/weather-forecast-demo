@@ -3,9 +3,12 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinKapt)
     alias(libs.plugins.daggerHiltAndroid)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.realm)
+    id("kotlin-kapt")
 }
 
 fun File.loadGradleProperties(fileName: String): Properties {
@@ -146,6 +149,9 @@ dependencies {
     // Hilt
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.android.compiler)
+
+    //DB
+    implementation(libs.realm.base)
 
     //Navigation
     implementation(libs.androidx.compose.navigation)

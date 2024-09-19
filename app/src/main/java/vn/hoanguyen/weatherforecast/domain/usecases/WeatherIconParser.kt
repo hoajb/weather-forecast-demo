@@ -2,7 +2,9 @@ package vn.hoanguyen.weatherforecast.domain.usecases
 
 import vn.hoanguyen.weatherforecast.R
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class WeatherIconParser @Inject constructor() {
     operator fun invoke(iconName: String): Int {
         return when (iconName) {

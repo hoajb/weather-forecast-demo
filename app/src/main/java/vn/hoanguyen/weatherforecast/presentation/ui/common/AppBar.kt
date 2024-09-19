@@ -1,5 +1,6 @@
 package vn.hoanguyen.weatherforecast.presentation.ui.common
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
@@ -24,7 +25,6 @@ import vn.hoanguyen.weatherforecast.presentation.ui.theme.AppTypography
 
 @Composable
 fun TopAppBar(
-    modifier: Modifier = Modifier,
     title: String = "",
     onBack: (() -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
@@ -33,14 +33,14 @@ fun TopAppBar(
     Column {
         CenterAlignedTopAppBar(
             colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = Color.White,
                 titleContentColor = MaterialTheme.colorScheme.primary,
             ),
             title = {
                 Text(
-                    title, style = AppTypography.titleLarge.copy(
-                        color = Color.Black,
-                    ), maxLines = 1, overflow = TextOverflow.Ellipsis
+                    title,
+                    style = AppTypography.titleLarge,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             },
             navigationIcon = {
@@ -59,7 +59,9 @@ fun TopAppBar(
         HorizontalDivider(
             modifier = Modifier.padding(horizontal = 20.dp),
             thickness = 0.5.dp,
-            color = Color.Black.copy(alpha = 0.3f)
+            color = if (isSystemInDarkTheme()) Color.White.copy(alpha = 0.3f) else Color.Black.copy(
+                alpha = 0.3f
+            )
         )
     }
 }

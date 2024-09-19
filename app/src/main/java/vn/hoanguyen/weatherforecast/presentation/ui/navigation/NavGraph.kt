@@ -41,13 +41,13 @@ private fun NavGraphBuilder.addDetailsScreen(
     navController: NavHostController,
 ) {
     composable(
-        route = NavRoute.Details.withArgsFormat(NavRoute.Details.city),
+        route = NavRoute.Details.withArgsFormat(NavRoute.Details.CITY),
         arguments = listOf(
-            navArgument(NavRoute.Details.city) { type = NavType.StringType },
+            navArgument(NavRoute.Details.CITY) { type = NavType.StringType },
         )
     ) { backStackEntry ->
         DetailsScreen(
-            city = backStackEntry.arguments?.getString(NavRoute.Details.city)
+            city = backStackEntry.arguments?.getString(NavRoute.Details.CITY)
                 .orEmpty(),
             onBack = { navController.popBackStack() },
         )

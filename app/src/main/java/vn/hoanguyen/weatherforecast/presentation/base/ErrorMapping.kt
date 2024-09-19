@@ -1,6 +1,7 @@
 package vn.hoanguyen.weatherforecast.presentation.base
 
 import android.content.Context
+import timber.log.Timber
 import vn.hoanguyen.weatherforecast.R
 import vn.hoanguyen.weatherforecast.app.extensions.showToast
 import vn.hoanguyen.weatherforecast.domain.exceptions.ApiException
@@ -12,5 +13,8 @@ fun Throwable.userReadableMessage(context: Context): String {
     } ?: context.getString(R.string.error_generic)
 }
 
-fun Throwable.showToast(context: Context) =
-    context.showToast(userReadableMessage(context))
+fun Throwable.showToast(context: Context) {
+    val mes = userReadableMessage(context)
+    Timber.e(mes)
+    context.showToast(mes)
+}

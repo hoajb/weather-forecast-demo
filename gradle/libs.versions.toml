@@ -1,6 +1,6 @@
 [versions]
 agp = "8.6.0"
-kotlin = "1.9.0"
+kotlin = "2.0.20"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -9,6 +9,9 @@ lifecycleRuntimeKtx = "2.8.5"
 activityCompose = "1.9.2"
 composeBom = "2024.04.01"
 
+realm = "2.3.0"
+realmAndroidLibrary = "10.11.0"
+realmAnnotations = "10.11.0"
 hilt = "2.51.1"
 androidxHiltNavigationCompose = "1.1.0"
 navigation-compose-version = "2.7.7"
@@ -52,9 +55,15 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref = "gsonVersi
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
 converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
 logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptorVersion" }
-
 chuckerDebug = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chuckerVersion" }
 chuckerRelease = { group = "com.github.chuckerteam.chucker", name = "library-no-op", version.ref = "chuckerVersion" }
+
+# DB
+realm-base = { module = "io.realm.kotlin:library-base", version.ref = "realm" }
+realm-sync = { module = "io.realm.kotlin:library-sync", version.ref = "realm" }
+realm-plugin = { module = "io.realm.kotlin:gradle-plugin", version.ref = "realm" }
+realm-android-library = { module = "io.realm:realm-android-library", version.ref = "realmAndroidLibrary" }
+realm-annotations = { module = "io.realm:realm-annotations", version.ref = "realmAnnotations" }
 
 # DI
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
@@ -73,6 +82,8 @@ androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", nam
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 daggerHiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+realm = { id = "io.realm.kotlin", version.ref = "realm" }
 

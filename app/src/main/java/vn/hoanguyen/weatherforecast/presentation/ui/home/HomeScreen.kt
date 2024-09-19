@@ -19,7 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import vn.hoanguyen.weatherforecast.R
@@ -31,7 +30,6 @@ fun HomeScreen(
     onNavigateToFavorite: () -> Unit
 ) {
     Scaffold(
-        containerColor = Color.White,
         topBar = {
             TopAppBar(title = stringResource(R.string.home_title_bar))
         }
@@ -48,7 +46,7 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                var cityNameValue by remember { mutableStateOf("London") }
+                var cityNameValue by remember { mutableStateOf("") }
 
                 OutlinedTextField(
                     value = cityNameValue,
@@ -66,7 +64,7 @@ fun HomeScreen(
                     enabled = cityNameValue.isNotEmpty(), onClick = {
                         onNavigateToDetails.invoke(cityNameValue)
                     }) {
-                    Text("Show")
+                    Text("Weather")
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -74,7 +72,7 @@ fun HomeScreen(
                 Button(onClick = {
                     onNavigateToFavorite.invoke()
                 }) {
-                    Text("Favorite")
+                    Text("Favorite City List")
                 }
             }
         }
