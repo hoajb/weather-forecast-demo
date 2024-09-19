@@ -2,4 +2,8 @@
     <string name="app_name">Weather Forecast Application</string>
     <string name="error_generic">Unexpected error</string>
     <string name="home_title_bar">Home</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="city">City</string>
+    <string name="not_found">Oops! City not found.\nPlease try again.</string>
 </resources>

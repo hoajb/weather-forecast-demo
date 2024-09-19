@@ -5,5 +5,5 @@ import vn.hoanguyen.weatherforecast.domain.models.MainWeatherModel
 
 interface Repository {
 
-    fun getWeather(): Flow<MainWeatherModel>
+    fun getWeather(cityName: String): Flow<MainWeatherModel>
 }

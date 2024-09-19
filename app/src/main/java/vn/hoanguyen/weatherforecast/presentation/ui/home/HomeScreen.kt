@@ -48,7 +48,7 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                var cityNameValue by remember { mutableStateOf("") }
+                var cityNameValue by remember { mutableStateOf("London") }
 
                 OutlinedTextField(
                     value = cityNameValue,

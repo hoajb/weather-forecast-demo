@@ -3,10 +3,12 @@ package vn.hoanguyen.weatherforecast.data.response
 import vn.hoanguyen.weatherforecast.domain.models.MainModel
 import vn.hoanguyen.weatherforecast.domain.models.MainWeatherModel
 import vn.hoanguyen.weatherforecast.domain.models.WeatherModel
+import vn.hoanguyen.weatherforecast.domain.models.WindModel
 
 data class MainWeatherResponse(
-    val main: MainResponse,
     val name: String,
+    val main: MainResponse,
+    val wind: WindResponse,
     val weather: List<WeatherResponse>
 )
 
@@ -16,12 +18,18 @@ data class MainResponse(
 )
 
 data class WeatherResponse(
-    val description: String
+    val description: String,
+    val icon: String
+)
+
+data class WindResponse(
+    val speed: Double
 )
 
 fun MainWeatherResponse.toModel() = MainWeatherModel(
-    main = this.main.toModel(),
     name = this.name,
+    main = this.main.toModel(),
+    wind = this.wind.toModel(),
     weather = this.weather.toModels(),
 )
 
@@ -32,6 +40,11 @@ fun MainResponse.toModel() = MainModel(
 
 fun WeatherResponse.toModel() = WeatherModel(
     description = this.description,
+    icon = this.icon,
+)
+
+fun WindResponse.toModel() = WindModel(
+    speed = this.speed,
 )
 
 fun List<WeatherResponse>.toModels() = this.map { it.toModel() }

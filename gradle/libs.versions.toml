@@ -23,6 +23,7 @@ playServicesLocation = "21.2.0"
 coroutines = "1.7.3"
 kotlinx-collections-immutable = "0.3.7"
 timber-version = "5.0.1"
+lifecycleRuntimeComposeAndroid = "2.8.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -66,10 +67,12 @@ play-services-location = { group = "com.google.android.gms", name = "play-servic
 
 # Utils
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber-version" }
+androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "lifecycleRuntimeComposeAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 daggerHiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 

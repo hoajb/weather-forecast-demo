@@ -1,9 +1,25 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlinKapt)
     alias(libs.plugins.daggerHiltAndroid)
+    alias(libs.plugins.kotlin.parcelize)
 }
+
+fun File.loadGradleProperties(fileName: String): Properties {
+    val properties = Properties()
+    val signingProperties = File(this, fileName)
+
+    if (signingProperties.isFile) {
+        properties.load(signingProperties.inputStream())
+    }
+    return properties
+}
+
+val keystoreProperties = rootDir.loadGradleProperties("signing.properties")
+val appKeyProperties = rootDir.loadGradleProperties("appkey.properties")
 
 android {
     namespace = "vn.hoanguyen.weatherforecast"
@@ -22,6 +38,23 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            // Remember to edit signing.properties to have the correct info for release build.
+            storeFile = file("../config/release.keystore")
+            storePassword = keystoreProperties.getProperty("KEYSTORE_PASSWORD") as String
+            keyPassword = keystoreProperties.getProperty("KEY_PASSWORD") as String
+            keyAlias = keystoreProperties.getProperty("KEY_ALIAS") as String
+        }
+
+        getByName("debug") {
+            storeFile = file("../config/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
@@ -31,6 +64,8 @@ android {
                 "BASE_API_URL",
                 "\"https://api.openweathermap.org/data/2.5/\""
             )
+            // Use the API key from the properties file
+            buildConfigField("String", "WEATHER_API_KEY", "\"${appKeyProperties["WEATHER_API_KEY"]}\"")
         }
 
         getByName("debug") {
@@ -41,6 +76,8 @@ android {
                 "BASE_API_URL",
                 "\"https://api.openweathermap.org/data/2.5/\""
             )
+            // Use the API key from the properties file
+            buildConfigField("String", "WEATHER_API_KEY", "\"${appKeyProperties["WEATHER_API_KEY"]}\"")
         }
     }
     compileOptions {
@@ -92,6 +129,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.lifecycle.runtime.compose.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
