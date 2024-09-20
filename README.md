@@ -11,6 +11,7 @@ The app fetches weather data and displays it in a user-friendly manner.
 - [Setup Instructions](#setup-instructions)
 - [Configuration](#configuration)
 - [Usage](#usage)
+- [Screenshots](#screenshots)
 - [License](#license)
 
 ## Features
@@ -74,6 +75,20 @@ file for the structure and required properties.
 
 Once the app is set up and running, you can start using it to fetch and view weather data. The app’s
 UI will allow you to enter a city name and fetch the corresponding weather details.
+
+## Screenshots
+<table>
+  <tr>
+    <td><img src="https://github.com/hoajb/weather-forecast-demo/blob/master/screenshots/home_light.jpg" alt="home_light" width="200"></td>
+    <td><img src="https://github.com/hoajb/weather-forecast-demo/blob/master/screenshots/details_light.jpg" alt="details_light" width="200"></td>
+    <td><img src="https://github.com/hoajb/weather-forecast-demo/blob/master/screenshots/favorite_light2.jpg" alt="favorite_light_2" width="200"></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/hoajb/weather-forecast-demo/blob/master/screenshots/home_dark.jpg" alt="home_dark" width="200"></td>
+    <td><img src="https://github.com/hoajb/weather-forecast-demo/blob/master/screenshots/unknown.jpg" alt="unknown" width="200"></td>
+    <td><img src="https://github.com/hoajb/weather-forecast-demo/blob/master/screenshots/empty.jpg" alt="empty" width="200"></td>
+  </tr>
+</table>
 
 ## License
 
