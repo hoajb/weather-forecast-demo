@@ -68,7 +68,11 @@ android {
                 "\"https://api.openweathermap.org/data/2.5/\""
             )
             // Use the API key from the properties file
-            buildConfigField("String", "WEATHER_API_KEY", "\"${appKeyProperties["WEATHER_API_KEY"]}\"")
+            buildConfigField(
+                "String",
+                "WEATHER_API_KEY",
+                "\"${appKeyProperties["WEATHER_API_KEY"]}\""
+            )
         }
 
         getByName("debug") {
@@ -80,9 +84,14 @@ android {
                 "\"https://api.openweathermap.org/data/2.5/\""
             )
             // Use the API key from the properties file
-            buildConfigField("String", "WEATHER_API_KEY", "\"${appKeyProperties["WEATHER_API_KEY"]}\"")
+            buildConfigField(
+                "String",
+                "WEATHER_API_KEY",
+                "\"${appKeyProperties["WEATHER_API_KEY"]}\""
+            )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -120,6 +129,15 @@ android {
             versionNameSuffix = "-prod"
         }
     }
+    testOptions{
+        animationsDisabled = true
+        unitTests {
+            isReturnDefaultValues = true
+        }
+        unitTests.all {
+            it.useJUnitPlatform()
+        }
+    }
 }
 
 dependencies {
@@ -134,8 +152,17 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
 
-    testImplementation(libs.junit)
+    //Testing
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.hilt.android.testing)
+    testImplementation(libs.turbin)
+    testImplementation(libs.kotest)
+    kaptTest(libs.dagger.hilt.android.compiler)
     androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.mockk.android)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)

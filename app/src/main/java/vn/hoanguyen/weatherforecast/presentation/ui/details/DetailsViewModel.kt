@@ -1,22 +1,19 @@
 package vn.hoanguyen.weatherforecast.presentation.ui.details
 
-import android.content.Context
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import vn.hoanguyen.weatherforecast.R
 import vn.hoanguyen.weatherforecast.app.util.DispatchersProvider
 import vn.hoanguyen.weatherforecast.domain.usecases.CapitalizeWordInString
 import vn.hoanguyen.weatherforecast.domain.usecases.GetWeatherDataUseCase
-import vn.hoanguyen.weatherforecast.domain.usecases.WeatherIconParser
 import vn.hoanguyen.weatherforecast.presentation.base.BaseViewModel
 import vn.hoanguyen.weatherforecast.presentation.ui.models.toUIModel
+import vn.hoanguyen.weatherforecast.presentation.utils.WeatherIconParser
 import javax.inject.Inject
 import kotlin.math.floor
 
@@ -26,7 +23,6 @@ class DetailsViewModel @Inject constructor(
     private val getWeatherDataUseCase: GetWeatherDataUseCase,
     private val capitalizeWordInString: CapitalizeWordInString,
     private val weatherIconParser: WeatherIconParser,
-    @ApplicationContext private val context: Context
 ) : BaseViewModel() {
     private val _uiModel = MutableStateFlow(WeatherDetailsUI.init())
     val uiModel = _uiModel.asStateFlow()

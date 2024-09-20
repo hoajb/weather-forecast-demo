@@ -24,12 +24,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    WeatherForecastApplicationTheme {
-        val navController = rememberNavController()
-        NavGraph(navController = navController)
-    }
-}

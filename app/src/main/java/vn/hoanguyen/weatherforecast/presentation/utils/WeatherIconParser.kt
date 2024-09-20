@@ -1,4 +1,4 @@
-package vn.hoanguyen.weatherforecast.domain.usecases
+package vn.hoanguyen.weatherforecast.presentation.utils
 
 import vn.hoanguyen.weatherforecast.R
 import javax.inject.Inject
